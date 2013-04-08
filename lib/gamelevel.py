@@ -1,0 +1,3 @@
+
+class GameLevel( object ):
+  pass
