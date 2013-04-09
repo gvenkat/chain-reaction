@@ -3,12 +3,10 @@ import sys
 import pygame
 import time
 
-
 sys.path.insert( 0, 'lib' )
 
 from pygame.locals import *
 import grid
-
 
 # constants
 WIDTH = 800
@@ -28,8 +26,7 @@ screen = pygame.display.set_mode( ( WIDTH, HEIGHT ), HWSURFACE | DOUBLEBUF )
 screen.fill( BACKGROUND_COLOR )
 
 # Draw the grid
-_grid = grid.Grid( screen )
-_grid.draw()
+grid.Grid( screen ).draw()
 
 pygame.display.flip()
 
