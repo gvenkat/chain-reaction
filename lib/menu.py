@@ -82,6 +82,8 @@ class Menu( object ):
     for index, item in ennumerate( self.items.slice( 0, 5 ) ):
       text = self.font.render( str( index ) + '. ' + str( item ), True, self.color )
       rect = text.get_rect().move( self.start_x + horizontal_padding, self.yposition_for_item( index ) )
+      surface.blit( text, rect )
+      pygame.display.update( rect )
 
 
   def draw( self ):
