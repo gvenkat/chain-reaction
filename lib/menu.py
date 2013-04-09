@@ -1,5 +1,5 @@
 
-from pygame import event, font, Color
+from pygame import event, font, Color, Rect, draw, display
 import sys
 
 # If its not already initialized
@@ -8,7 +8,7 @@ font.init()
 
 class Menu( object ):
 
-  def __init__( surface, items=[ ], callback=None, start_x=None, end_x=None, start_y=None, end_y=None, background=Color( 85, 85, 85, 30 )  )
+  def __init__( self, surface, items=[ ], callback=None, start_x=None, end_x=None, start_y=None, end_y=None, background=Color( 85, 85, 85, 30 )  ):
     self.surface = surface
     self.items = items
     self.callback = callback
@@ -16,17 +16,18 @@ class Menu( object ):
     self.end_x = end_x
     self.start_y = start_y
     self.end_y = end_y
+    self.background = background
 
     if self.callback is None:
-      sys.stderr.print( "No callback given ... wouldn't know what to do" )
+      sys.stderr.write( "No callback given ... wouldn't know what to do" )
 
     if len( items ) == 0:
-      sys.stderr.print( "No items given, what do you need the menu for?" )
+      sys.stderr.write( "No items given, what do you need the menu for?" )
       raise SystemExit
 
-    if any( lambda x: x is None, ( start_x, end_x, start_y, end_y ) ):
+    if start_x is None or end_x is None or start_y is None or end_y is None: 
 
-      sys.stderr.print( 
+      sys.stderr.write( 
         """
           The dimensions not given properly, i'll just make it up myself, don't worry too much, 
           i'll make it look as good as i can
@@ -42,9 +43,15 @@ class Menu( object ):
       self.end_y    = self.start_y + menu_height 
 
 
+  def draw_container( self ):
+    draw.rect( self.surface, self.background, Rect( ( self.start_x, self.start_y ), ( self.end_x - self.start_x , self.end_y - self.start_y ) ) )
 
-    def run():
-      pass
+
+  def draw( self ):
+    self.draw_container()
+
+
+
 
 
 

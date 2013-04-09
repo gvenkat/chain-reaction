@@ -6,7 +6,9 @@ import time
 sys.path.insert( 0, 'lib' )
 
 from pygame.locals import *
+
 import grid
+import menu
 
 # constants
 WIDTH = 800
@@ -28,6 +30,10 @@ screen.fill( BACKGROUND_COLOR )
 # Draw the grid
 grid.Grid( screen ).draw()
 
+# Initial menu
+_menu = menu.Menu( screen, [ 'Start', 'Help', 'Quit' ] )
+_menu.draw()
+
 pygame.display.flip()
 
 # deal with the game
@@ -36,5 +42,8 @@ while True:
   for event in pygame.event.get():
     if event.type == QUIT:
       raise SystemExit
+
+  pygame.display.flip()
+
 
   time.sleep( 1 )
