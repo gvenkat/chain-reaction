@@ -13,12 +13,14 @@ class Grid( object ):
     width, height = self.surface.get_size()
     
     # vertical lines
-    for i in range( int( width / self.grid_lines ) ):
-      draw.line( self.surface, self.color, ( i, 0 ), ( i, height ), 1 )
+    vertical_line_spacing = width / self.grid_lines
+    for i in range( self.grid_lines ): 
+      draw.line( self.surface, self.color, ( i * vertical_line_spacing, 0 ), ( i * vertical_line_spacing, height ), 1 )
 
     # horizontal lines
-    for j in range( int( height / self.grid_lines ) ):
-      draw.line( self.surface, self.color, ( 0, j ), ( width, j ), 1 )
+    horizontal_line_spacing = int( height / self.grid_lines )
+    for j in range( self.grid_lines ): 
+      draw.line( self.surface, self.color, ( 0, j * horizontal_line_spacing ), ( width, j * horizontal_line_spacing ), 1 )
 
 
 
