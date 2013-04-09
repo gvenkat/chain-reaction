@@ -99,7 +99,7 @@ class Menu( object ):
       display.update( rect )
 
 
-  def setup_cursor( self ):
+  def draw_cursor( self ):
     pass
 
 
