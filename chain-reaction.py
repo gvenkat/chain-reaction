@@ -14,7 +14,7 @@ import menu
 WIDTH = 800
 HEIGHT = 600
 DRAW_GRIDS = True
-BACKGROUND_COLOR = Color( 233, 233, 233 ) 
+BACKGROUND_COLOR = Color( 233, 233, 233 )
 FOREGROUND_COLOR = None
 GRID_COLOR = None
 
@@ -31,7 +31,7 @@ screen.fill( BACKGROUND_COLOR )
 grid.Grid( screen ).draw()
 
 # Initial menu
-_menu = menu.Menu( screen, [ 'Start', 'Help', 'Quit' ] )
+_menu = menu.Menu( screen, [ 'Start', 'Help', 'Quit' ], font_size=30 )
 _menu.draw()
 
 pygame.display.flip()
