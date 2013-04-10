@@ -1,5 +1,8 @@
 
 from pygame import event, font, Color, Rect, draw, display
+from pygame.locals import *
+import pygame
+
 import sys
 
 # If its not already initialized
@@ -123,16 +126,36 @@ class Menu( object ):
   def cursor_y_position( self ):
     return self.yposition_for_item( self.cursor_position ) + 5
 
-
   def draw_cursor( self ):
-    self.cursor = draw.circle( self.surface, self.cursor_color, ( self.cursor_x_position(), self.cursor_y_position() ), self.cursor_radius )
+    self.cursor = draw.circle(
+      self.surface,
+      self.cursor_color,
+      ( self.cursor_x_position(), self.cursor_y_position() ),
+      self.cursor_radius
+    )
 
+
+  def setup_highlighted_text( self ):
+    pass
+
+
+  def handle_event( self, event ):
+    if event.type == KEYDOWN:
+      if event.key in [ pygame.locals[ 'K_' + str( i ) ] for i,j in enumerate( self.items ) ]:
+        print "right key"
+      elif event.key == K_DOWN:
+        print "right key"
+      elif event.key == K_UP:
+        print "right key"
+      else:
+        print "not the right key"
 
 
   def draw( self ):
     self.draw_container()
     self.draw_items()
     self.draw_cursor()
+    self.setup_highlighted_text()
 
 
 

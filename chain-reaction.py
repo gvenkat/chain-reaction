@@ -9,6 +9,7 @@ from pygame.locals import *
 
 import grid
 import menu
+import game
 
 # constants
 WIDTH = 800
@@ -42,8 +43,7 @@ while True:
   for event in pygame.event.get():
     if event.type == QUIT:
       raise SystemExit
+    elif not game.Game.started:
+      _menu.handle_event( event )
 
   pygame.display.flip()
-
-
-  time.sleep( 1 )
