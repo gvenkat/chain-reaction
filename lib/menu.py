@@ -1,6 +1,5 @@
 
-from pygame import event, font, Color, Rect, draw, display
-from pygame.locals import *
+from pygame import event, font, Color, Rect, draw, display, constants, Surface
 import pygame
 
 import sys
@@ -127,28 +126,48 @@ class Menu( object ):
     return self.yposition_for_item( self.cursor_position ) + 5
 
   def draw_cursor( self ):
-    self.cursor = draw.circle(
-      self.surface,
+    self.cursor = Surface( ( self.cursor_radius, self.cursor_radius ) )
+
+    draw.circle(
+      self.cursor,
       self.cursor_color,
-      ( self.cursor_x_position(), self.cursor_y_position() ),
+      ( 0, 0 ),
       self.cursor_radius
     )
+
+    self.surface.blit( self.cursor, ( self.cursor_x_position(), self.cursor_y_position() ) )
+
 
 
   def setup_highlighted_text( self ):
     pass
 
+  def goto( self, to_index ):
+
+    if to_index > len( self.items ) - 1:
+      self.cursor_position = 0
+    elif to_index < 0:
+      self.cursor_position = len( items ) - 1
+    else:
+      self.cursor_position = to_index
+
+    self.update_cursor_position()
+
+  def update_cursor_position( self ):
+    self.surface.blit( self.cursor, ( self.cursor_x_position(), self.cursor_y_position() ) )
+
+
 
   def handle_event( self, event ):
-    if event.type == KEYDOWN:
-      if event.key in [ pygame.locals[ 'K_' + str( i ) ] for i,j in enumerate( self.items ) ]:
+    if event.type == constants.KEYDOWN:
+      if event.key in [ getattr( constants, 'K_' + str( i + 1 ) ) for i,j in enumerate( self.items ) ]:
         print "right key"
-      elif event.key == K_DOWN:
-        print "right key"
-      elif event.key == K_UP:
-        print "right key"
+      elif event.key == constants.K_DOWN:
+        self.goto( self.cursor_position + 1 )
+      elif event.key == constants.K_UP:
+        self.goto( self.cursor_position - 1 )
       else:
-        print "not the right key"
+        print "whatever else"
 
 
   def draw( self ):
