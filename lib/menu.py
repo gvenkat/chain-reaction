@@ -7,7 +7,22 @@ font.init()
 
 class Menu( object ):
 
-  def __init__( self, surface, items=[ ], callback=None, start_x=None, end_x=None, start_y=None, end_y=None, background=Color( 85, 85, 85, 30 ), font_name=None, font_size=12, color=Color( 255, 255, 255, 30 )  ):
+  def __init__( self,
+                surface,
+                items=[ ],
+                callback=None,
+                start_x=None,
+                end_x=None,
+                start_y=None,
+                end_y=None,
+                background=Color( 85, 85, 85, 30 ),
+                font_name=None,
+                font_size=12,
+                color=Color( 255, 255, 255, 30 ),
+                cursor_color=Color( 224, 27, 106, 30 ),
+                cursor_radius=10
+              ):
+
     self.surface = surface
     self.items = items
     self.callback = callback
@@ -19,6 +34,9 @@ class Menu( object ):
     self.color = color
     self.font_size = font_size
     self.menu_items = [ ]
+    self.cursor_color = cursor_color
+    self.cursor_radius = cursor_radius
+    self.cursor_position = 0
 
     if font is None:
       self.font = font.Font( None, font_size )
@@ -99,8 +117,16 @@ class Menu( object ):
       display.update( rect )
 
 
+  def cursor_x_position( self ):
+    return self.start_x + 200
+
+  def cursor_y_position( self ):
+    return self.yposition_for_item( self.cursor_position ) + 5
+
+
   def draw_cursor( self ):
-    pass
+    self.cursor = draw.circle( self.surface, self.cursor_color, ( self.cursor_x_position(), self.cursor_y_position() ), self.cursor_radius )
+
 
 
   def draw( self ):
