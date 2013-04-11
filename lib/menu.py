@@ -1,6 +1,7 @@
 
 from pygame import event, font, Color, Rect, draw, display, constants, Surface
 import pygame
+import cursor
 
 import sys
 
@@ -126,15 +127,7 @@ class Menu( object ):
     return self.yposition_for_item( self.cursor_position ) + 5
 
   def draw_cursor( self ):
-    self.cursor = Surface( ( self.cursor_radius, self.cursor_radius ) )
-
-    draw.circle(
-      self.cursor,
-      self.cursor_color,
-      ( 0, 0 ),
-      self.cursor_radius
-    )
-
+    self.cursor = cursor.Cursor()
     self.surface.blit( self.cursor, ( self.cursor_x_position(), self.cursor_y_position() ) )
 
 
