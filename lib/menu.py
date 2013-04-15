@@ -1,5 +1,5 @@
 
-from pygame import event, font, Color, Rect, draw, display, constants, Surface
+from pygame import event, font, Color, Rect, draw, display, constants, Surface, sprite
 import pygame
 import cursor
 
@@ -7,6 +7,10 @@ import sys
 
 # If its not already initialized
 font.init()
+
+def eraseSprite(screen, rect):
+   screen.blit(blank, rect)
+
 
 class Menu( object ):
 
@@ -40,6 +44,9 @@ class Menu( object ):
     self.cursor_color = cursor_color
     self.cursor_radius = cursor_radius
     self.cursor_position = 0
+
+    self.blank = pygame.Surface((cursor_radius, cursor_radius))
+    self.blank.fill((255, 255, 255))
 
     if font is None:
       self.font = font.Font( None, font_size )
@@ -127,9 +134,12 @@ class Menu( object ):
     return self.yposition_for_item( self.cursor_position ) + 5
 
   def draw_cursor( self ):
+    # Create and draw
     self.cursor = cursor.Cursor()
-    self.surface.blit( self.cursor, ( self.cursor_x_position(), self.cursor_y_position() ) )
+    self.cursor_group = sprite.Group( ( self.cursor ) )
+    # self.cursor_group.draw( self.surface )
 
+    self.update_cursor_position()
 
 
   def setup_highlighted_text( self ):
@@ -147,7 +157,11 @@ class Menu( object ):
     self.update_cursor_position()
 
   def update_cursor_position( self ):
-    self.surface.blit( self.cursor, ( self.cursor_x_position(), self.cursor_y_position() ) )
+    self.cursor.set_position( ( self.cursor_x_position(), self.cursor_y_position() ) )
+    self.cursor_group.clear( self.surface, lambda s,r: s.blit( self.blank, r ) )
+
+    self.cursor_group.update()
+    self.cursor_group.draw( self.surface )
 
 
 

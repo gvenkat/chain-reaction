@@ -1,5 +1,6 @@
 
 from pygame import sprite
+import pygame
 
 class Cursor( sprite.Sprite ):
 
@@ -11,7 +12,15 @@ class Cursor( sprite.Sprite ):
     self.image.fill((255, 255, 255))
     pygame.draw.circle(self.image, (0, 0, 255), (25, 25), 25, 0)
     self.rect = self.image.get_rect()
+    self.pos = None
 
 
-  def update(self):
-    self.rect.center = pygame.mouse.get_pos()
+  def set_position( self, pos ):
+    self.pos = pos
+
+  def update( self ):
+    print "I get called"
+    self.rect.midtop = self.pos
+
+
+
