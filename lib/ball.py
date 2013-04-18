@@ -40,4 +40,3 @@ class GameBall( sprite.Sprite ):
   def update( self ):
     self.x += self.rightspeed
     self.y += self.downspeed
-
