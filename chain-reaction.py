@@ -35,25 +35,38 @@ grid.Grid( screen ).draw()
 _menu = menu.Menu( screen, [ 'Start', 'Help', 'Quit' ], font_size=30 )
 _menu.draw()
 
+# game
+_game = game.Game( screen )
+
 pygame.display.flip()
+
 
 # deal with the game
 while True:
 
+
   for event in pygame.event.get():
     if event.type == QUIT:
       raise SystemExit
+
     elif not game.Game.started:
       what = _menu.handle_event( event )
 
       if what == 'Start':
-        pass
+        # redraw the grid
+        screen.fill( BACKGROUND_COLOR )
+        grid.Grid( screen ).draw()
+        _game.start()
 
       elif what == 'Quit':
         raise SystemExit
 
       elif what == 'Help':
         pass
+
+    elif game.Game.started:
+      _game.handle_event( event )
+
 
 
 
