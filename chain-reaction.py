@@ -44,6 +44,17 @@ while True:
     if event.type == QUIT:
       raise SystemExit
     elif not game.Game.started:
-      _menu.handle_event( event )
+      what = _menu.handle_event( event )
+
+      if what == 'Start':
+        pass
+
+      elif what == 'Quit':
+        raise SystemExit
+
+      elif what == 'Help':
+        pass
+
+
 
   pygame.display.flip()

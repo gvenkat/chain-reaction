@@ -166,18 +166,19 @@ class Menu( object ):
         for i, j in enumerate( self.items ):
           if getattr( constants, 'K_' + str( i + 1 ) ) == event.key:
             self.goto( i )
-            return
+            return None
         else:
           print "not a valid number for given items"
-
 
       elif event.key == constants.K_DOWN:
         self.goto( self.cursor_position + 1 )
       elif event.key == constants.K_UP:
         self.goto( self.cursor_position - 1 )
+      elif event.key == constants.K_RETURN:
+        return self.items[ self.cursor_position ]
+
       else:
         print "whatever else"
-
 
   def draw( self ):
     self.draw_container()
