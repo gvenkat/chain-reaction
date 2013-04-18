@@ -45,8 +45,9 @@ class Menu( object ):
     self.cursor_radius = cursor_radius
     self.cursor_position = 0
 
-    self.blank = pygame.Surface((cursor_radius, cursor_radius))
-    self.blank.fill((255, 255, 255))
+    # Use a blank background
+    self.blank = pygame.Surface((cursor_radius, cursor_radius) )
+    self.blank.fill( self.background )
 
     if font is None:
       self.font = font.Font( None, font_size )
@@ -135,7 +136,7 @@ class Menu( object ):
 
   def draw_cursor( self ):
     # Create and draw
-    self.cursor = cursor.Cursor()
+    self.cursor = cursor.Cursor( self.cursor_color, self.cursor_radius )
     self.cursor_group = sprite.Group( ( self.cursor ) )
     # self.cursor_group.draw( self.surface )
 
