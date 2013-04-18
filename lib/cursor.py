@@ -21,7 +21,6 @@ class Cursor( sprite.Sprite ):
     self.pos = pos
 
   def update( self ):
-    print "I get called"
     self.rect.midtop = self.pos
 
 
