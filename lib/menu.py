@@ -26,7 +26,7 @@ class Menu( object ):
                 font_name=None,
                 font_size=12,
                 color=Color( 255, 255, 255, 30 ),
-                cursor_color=Color( 224, 27, 106, 30 ),
+                cursor_color=Color( 255, 255, 255, 100),
                 cursor_radius=10
               ):
 
@@ -46,7 +46,7 @@ class Menu( object ):
     self.cursor_position = 0
 
     # Use a blank background
-    self.blank = pygame.Surface((cursor_radius, cursor_radius) )
+    self.blank = pygame.Surface((cursor_radius * 2 , cursor_radius * 2) )
     self.blank.fill( self.background )
 
     if font is None:
@@ -63,13 +63,6 @@ class Menu( object ):
       raise SystemExit
 
     if start_x is None or end_x is None or start_y is None or end_y is None:
-
-      sys.stderr.write(
-        """
-          The dimensions not given properly, i'll just make it up myself, don't worry too much,
-          i'll make it look as good as i can
-        """
-      )
 
       width, height = surface.get_size()
       menu_width, menu_height   = ( int( width * 0.7 ), int( height * 0.7 ) )
@@ -132,7 +125,7 @@ class Menu( object ):
     return self.start_x + 200
 
   def cursor_y_position( self ):
-    return self.yposition_for_item( self.cursor_position ) + 5
+    return self.yposition_for_item( self.cursor_position )
 
   def draw_cursor( self ):
     # Create and draw
@@ -151,7 +144,7 @@ class Menu( object ):
     if to_index > len( self.items ) - 1:
       self.cursor_position = 0
     elif to_index < 0:
-      self.cursor_position = len( items ) - 1
+      self.cursor_position = len( self.items ) - 1
     else:
       self.cursor_position = to_index
 
@@ -169,7 +162,15 @@ class Menu( object ):
   def handle_event( self, event ):
     if event.type == constants.KEYDOWN:
       if event.key in [ getattr( constants, 'K_' + str( i + 1 ) ) for i,j in enumerate( self.items ) ]:
-        print "right key"
+
+        for i, j in enumerate( self.items ):
+          if getattr( constants, 'K_' + str( i + 1 ) ) == event.key:
+            self.goto( i )
+            return
+        else:
+          print "not a valid number for given items"
+
+
       elif event.key == constants.K_DOWN:
         self.goto( self.cursor_position + 1 )
       elif event.key == constants.K_UP:
