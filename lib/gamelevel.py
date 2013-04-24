@@ -3,5 +3,6 @@ levels = {
     'ball_size': 10,
     'expanded_ball_size': 50,
     'ball_speed': 3,
+    'number_of_balls': 5
   }
 }

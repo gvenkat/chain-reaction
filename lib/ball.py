@@ -1,6 +1,7 @@
 
 import math
 import random
+import pygame
 from pygame import sprite, Color
 
 
@@ -35,7 +36,7 @@ class GameBall( sprite.Sprite ):
 
 
   def get_random_color( self ):
-    return Color( random.randrange( 0, 256 ), random.randrange( 0, 256 ), random.randomrange( 0, 256 ), 80 )
+    return Color( random.randrange( 0, 256 ), random.randrange( 0, 256 ), random.randrange( 0, 256 ), 100 )
 
   def update( self ):
     self.x += self.rightspeed
