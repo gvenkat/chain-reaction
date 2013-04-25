@@ -68,6 +68,8 @@ while True:
       _game.handle_event( event )
 
 
+  if game.Game.started:
+    _game.update()
 
 
   pygame.display.flip()

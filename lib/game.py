@@ -31,6 +31,13 @@ class Game( object ):
 
     group.draw( self.surface )
 
+    self.sprites, self.group = sprites, group
+
+
+  def update( self ):
+    self.group.update()
+    self.group.draw( self.surface )
+
 
   def handle_event( self, event ):
     print "About to handle game event"
