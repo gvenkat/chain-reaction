@@ -19,6 +19,7 @@ BACKGROUND_COLOR = Color( 233, 233, 233 )
 FOREGROUND_COLOR = None
 GRID_COLOR = None
 
+
 # initialize
 pygame.init()
 
@@ -38,14 +39,19 @@ _menu.draw()
 # game
 _game = game.Game( screen )
 
+# set ticks
+clock = pygame.time.Clock()
+
 pygame.display.flip()
+
 
 
 # deal with the game
 while True:
 
+  clock.tick( 30 )
 
-  for event in pygame.event.get():
+  for event in pygame.event.get( [ QUIT, KEYDOWN ] ):
     if event.type == QUIT:
       raise SystemExit
 

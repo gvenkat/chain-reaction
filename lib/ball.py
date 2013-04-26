@@ -18,7 +18,7 @@ class GameBall( sprite.Sprite ):
     self.xmax = xmax
     self.ymax = ymax
 
-    self.direction = random.random() * 360
+    self.direction = 20 + ( random.random() * 340 )
 
     self.downspeed = math.cos( self.direction ) * self.ball_speed
     self.rightspeed = math.sin( self.direction ) * self.ball_speed
@@ -35,6 +35,7 @@ class GameBall( sprite.Sprite ):
     self.rect.midtop = ( self.x, self.y )
 
 
+
   def get_random_color( self ):
     return Color( random.randrange( 0, 256 ), random.randrange( 0, 256 ), random.randrange( 0, 256 ), 100 )
 
@@ -42,10 +43,10 @@ class GameBall( sprite.Sprite ):
     self.x += self.rightspeed
     self.y += self.downspeed
 
-    if ( self.x - self.ball_size ) > self.xmax or ( self.x - self.ball_size ) < 0:
+    if  ( self.x + self.ball_size ) > self.xmax or ( self.x - self.ball_size ) < 0:
       self.rightspeed = -1 * self.rightspeed
 
-    if ( self.y - self.ball_size ) > self.ymax or ( self.y - self.ball_size ) < 0:
+    if ( self.y + self.ball_size * 2 ) > self.ymax or self.y  < 0:
       self.downspeed = -1 * self.downspeed
 
 
