@@ -1,5 +1,7 @@
 import gamelevel
 import ball
+import pygame
+
 from pygame.sprite import Group
 
 
@@ -33,9 +35,12 @@ class Game( object ):
 
     self.sprites, self.group = sprites, group
 
+    self.blank = pygame.Surface(( level[ 'ball_size'] * 2 , level[ 'ball_size' ] * 2) )
+    self.blank = self.blank.convert_alpha()
 
   def update( self ):
     self.group.update()
+    self.group.clear( self.surface, lambda s,r: s.blit( self.blank, r ) )
     self.group.draw( self.surface )
 
 
