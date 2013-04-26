@@ -1,6 +1,7 @@
 import gamelevel
 import ball
 import pygame
+import grid
 
 from pygame.sprite import Group
 
@@ -39,8 +40,11 @@ class Game( object ):
     self.blank = self.blank.convert_alpha()
 
   def update( self ):
-    self.group.update()
     self.group.clear( self.surface, lambda s,r: s.blit( self.blank, r ) )
+    self.surface.fill( pygame.Color( 233, 233, 233 ) )
+
+    grid.Grid( self.surface ).draw()
+    self.group.update()
     self.group.draw( self.surface )
 
 
