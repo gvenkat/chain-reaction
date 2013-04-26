@@ -51,7 +51,7 @@ while True:
 
   clock.tick( 30 )
 
-  for event in pygame.event.get( [ QUIT, KEYDOWN ] ):
+  for event in pygame.event.get( [ QUIT, KEYDOWN, MOUSEMOTION, MOUSEBUTTONDOWN ] ):
     if event.type == QUIT:
       raise SystemExit
 

@@ -56,7 +56,11 @@ class GameBall( sprite.Sprite ):
 
 class StarterBall( sprite.Sprite ):
 
-  def __init__( self, ball_size, color ):
+  def __init__( self, ball_size, color=Color( 255, 0, 0 ) ):
+
+    sprite.Sprite.__init__(self)
+
+
     self.placed = False
     self.ball_size = ball_size
     self.color  = color
@@ -70,12 +74,11 @@ class StarterBall( sprite.Sprite ):
     self.rect = self.image.get_rect()
     self.rect.midtop = ( 0, 0 )
 
+  def set_placed( self ):
+    self.placed = True
 
-  def update_position( self, x, y ):
-    self.rect.midtop = ( x, y )
-
-
-  def update( self ):
-    pass
+  def update( self, x, y ):
+    if not self.placed:
+      self.rect.midtop = ( x, y - self.ball_size )
 
 
