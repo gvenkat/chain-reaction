@@ -17,6 +17,7 @@ class GameBall( sprite.Sprite ):
     self.ball_speed = ball_speed
     self.xmax = xmax
     self.ymax = ymax
+    self.stopped = False
 
     self.direction = 20 + ( random.random() * 340 )
 
@@ -40,18 +41,18 @@ class GameBall( sprite.Sprite ):
     return Color( random.randrange( 0, 256 ), random.randrange( 0, 256 ), random.randrange( 0, 256 ), 100 )
 
   def update( self ):
-    self.x += self.rightspeed
-    self.y += self.downspeed
+    if not self.stopped:
+      self.x += self.rightspeed
+      self.y += self.downspeed
 
-    if  ( self.x + self.ball_size ) > self.xmax or ( self.x - self.ball_size ) < 0:
-      self.rightspeed = -1 * self.rightspeed
+      if  ( self.x + self.ball_size ) > self.xmax or ( self.x - self.ball_size ) < 0:
+        self.rightspeed = -1 * self.rightspeed
 
-    if ( self.y + self.ball_size * 2 ) > self.ymax or self.y  < 0:
-      self.downspeed = -1 * self.downspeed
+      if ( self.y + self.ball_size * 2 ) > self.ymax or self.y  < 0:
+        self.downspeed = -1 * self.downspeed
 
 
-
-    self.rect.midtop = ( self.x, self.y )
+      self.rect.midtop = ( self.x, self.y )
 
 
 class StarterBall( sprite.Sprite ):

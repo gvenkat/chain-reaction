@@ -33,7 +33,7 @@ screen.fill( BACKGROUND_COLOR )
 grid.Grid( screen ).draw()
 
 # Initial menu
-_menu = menu.Menu( screen, [ 'Start', 'Help', 'Quit' ], font_size=30 )
+_menu = menu.Menu( screen, [ 'Start', 'Quit' ], font_size=30 )
 _menu.draw()
 
 # game
@@ -67,8 +67,6 @@ while True:
       elif what == 'Quit':
         raise SystemExit
 
-      elif what == 'Help':
-        pass
 
     elif game.Game.started:
       _game.handle_event( event )

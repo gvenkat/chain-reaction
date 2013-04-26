@@ -27,6 +27,12 @@ class Game( object ):
     level       = gamelevel.levels[ str( Game.game_level ) ]
     xmax, ymax  = self.surface.get_size()
 
+
+    # Starter ball
+    starter = ball.StarterBall( 30, pygame.Color( 255, 0, 0 ) )
+    starter_group = Group( starter )
+    starter_group.draw( self.surface )
+
     # All balls
     sprites = [
       ball.GameBall( i, level[ 'ball_size' ], level[ 'ball_speed' ] , level[ 'expanded_ball_size' ], xmax, ymax )
@@ -38,11 +44,6 @@ class Game( object ):
 
     # Draw
     group.draw( self.surface )
-
-    # Starter ball
-    starter = ball.StarterBall( 30, pygame.Color( 255, 0, 0 ) )
-    starter_group = Group( starter )
-    starter_group.draw( self.surface )
 
     # Set instance variables
     self.sprites, self.group, self.starter, self.starter_group = sprites, group, starter, starter_group
@@ -61,8 +62,8 @@ class Game( object ):
     grid.Grid( self.surface ).draw()
 
     self.group.update()
-    self.group.draw( self.surface )
     self.starter_group.draw( self.surface )
+    self.group.draw( self.surface )
 
 
   def handle_event( self, event ):
