@@ -53,3 +53,29 @@ class GameBall( sprite.Sprite ):
 
     self.rect.midtop = ( self.x, self.y )
 
+
+class StarterBall( sprite.Sprite ):
+
+  def __init__( self, ball_size, color ):
+    self.placed = False
+    self.ball_size = ball_size
+    self.color  = color
+
+    image = pygame.Surface((ball_size*2, ball_size*2), pygame.SRCALPHA, 32)
+    self.image = image.convert_alpha()
+
+    pygame.draw.circle( self.image, self.color, ( ball_size, ball_size ), ball_size, 0 )
+
+    # Initialize it to 0,0
+    self.rect = self.image.get_rect()
+    self.rect.midtop = ( 0, 0 )
+
+
+  def update_position( self, x, y ):
+    self.rect.midtop = ( x, y )
+
+
+  def update( self ):
+    pass
+
+
