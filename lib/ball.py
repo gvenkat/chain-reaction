@@ -42,5 +42,13 @@ class GameBall( sprite.Sprite ):
     self.x += self.rightspeed
     self.y += self.downspeed
 
+    if ( self.x - self.ball_size ) > self.xmax or ( self.x - self.ball_size ) < 0:
+      self.rightspeed = -1 * self.rightspeed
+
+    if ( self.y - self.ball_size ) > self.ymax or ( self.y - self.ball_size ) < 0:
+      self.downspeed = -1 * self.downspeed
+
+
+
     self.rect.midtop = ( self.x, self.y )
 
