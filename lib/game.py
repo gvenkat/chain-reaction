@@ -53,7 +53,15 @@ class Game( object ):
     self.blank = pygame.Surface(( level[ 'ball_size'] * 2 , level[ 'ball_size' ] * 2) )
     self.blank = self.blank.convert_alpha()
 
+
   def update( self ):
+
+    if self.starter.placed:
+      for ball in self.sprites:
+        if ball.rect.colliderect( self.starter.rect ):
+          ball.stop()
+
+
     self.group.clear( self.surface, lambda s,r: s.blit( self.blank, r ) )
     self.starter_group.clear( self.surface, lambda s,r: s.blit( self.blank, r ) )
 
@@ -67,6 +75,7 @@ class Game( object ):
 
 
   def handle_event( self, event ):
+
     if event.type == MOUSEMOTION:
       x, y = pygame.mouse.get_pos()
       self.starter_group.update( x, y )

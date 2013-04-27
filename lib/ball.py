@@ -36,6 +36,8 @@ class GameBall( sprite.Sprite ):
     self.rect.midtop = ( self.x, self.y )
 
 
+  def stop( self ):
+    self.stopped = True
 
   def get_random_color( self ):
     return Color( random.randrange( 0, 256 ), random.randrange( 0, 256 ), random.randrange( 0, 256 ), 100 )
