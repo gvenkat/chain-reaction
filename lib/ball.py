@@ -36,6 +36,9 @@ class GameBall( sprite.Sprite ):
     self.rect.midtop = ( self.x, self.y )
 
 
+  def expand( self ):
+    pass
+
   def stop( self ):
     self.stopped = True
 

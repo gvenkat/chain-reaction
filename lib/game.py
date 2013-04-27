@@ -57,9 +57,21 @@ class Game( object ):
   def update( self ):
 
     if self.starter.placed:
+
       for ball in self.sprites:
-        if ball.rect.colliderect( self.starter.rect ):
+        # with the starter ball
+        if ball.rect.colliderect( self.starter.rect ) and not ball.stopped:
           ball.stop()
+          ball.expand()
+
+        if ball.stopped:
+          for other_ball in self.sprites:
+            if ( not other_ball is ball ) and ( not other_ball.stopped ) and other_ball.rect.colliderect( ball.rect ):
+              other_ball.stop()
+              other_ball.expand()
+
+
+
 
 
     self.group.clear( self.surface, lambda s,r: s.blit( self.blank, r ) )
