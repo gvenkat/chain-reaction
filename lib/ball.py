@@ -70,6 +70,8 @@ class StarterBall( sprite.Sprite ):
     self.placed = False
     self.ball_size = ball_size
     self.color  = color
+    self.timer  = 0
+    self.remove = False
 
     image = pygame.Surface((ball_size*2, ball_size*2), pygame.SRCALPHA, 32)
     self.image = image.convert_alpha()
@@ -83,8 +85,15 @@ class StarterBall( sprite.Sprite ):
   def set_placed( self ):
     self.placed = True
 
-  def update( self, x, y ):
+  def update( self, x=None, y=None ):
     if not self.placed:
-      self.rect.midtop = ( x, y - self.ball_size )
+      if not x is None and not y is None:
+        self.rect.midtop = ( x, y - self.ball_size )
+    else:
+      self.timer += 1
+
+      if self.timer == ( 30 * 10 ):
+        print "Setting remove"
+        self.remove = True
 
 

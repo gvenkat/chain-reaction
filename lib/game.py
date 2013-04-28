@@ -71,6 +71,9 @@ class Game( object ):
               other_ball.expand()
 
 
+    if self.starter.remove:
+      print "About to remove"
+      self.starter_group.remove( self.starter )
 
 
 
@@ -82,6 +85,8 @@ class Game( object ):
     grid.Grid( self.surface ).draw()
 
     self.group.update()
+    self.starter_group.update()
+
     self.starter_group.draw( self.surface )
     self.group.draw( self.surface )
 
