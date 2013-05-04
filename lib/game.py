@@ -72,9 +72,12 @@ class Game( object ):
 
 
     if self.starter.remove:
-      print "About to remove"
       self.starter_group.remove( self.starter )
 
+
+    for ball in self.sprites:
+      if ball.remove:
+        self.group.remove( ball )
 
 
     self.group.clear( self.surface, lambda s,r: s.blit( self.blank, r ) )
