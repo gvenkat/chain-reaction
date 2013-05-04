@@ -13,30 +13,22 @@ import menu
 import game
 
 
-# initialize
 pygame.init()
 
-# start display
 screen = pygame.display.set_mode( ( WIDTH, HEIGHT ), HWSURFACE | DOUBLEBUF )
 
-# background
 screen.fill( BACKGROUND_COLOR )
 
-# Draw the grid
 grid.Grid( screen ).draw()
 
-# Initial menu
 _menu = menu.Menu( screen, [ 'Start', 'Quit' ], font_size=30 )
 _menu.draw()
 
-# game
 _game = game.Game( screen )
 
-# set ticks
 clock = pygame.time.Clock()
 
 pygame.display.flip()
-
 
 
 # deal with the game
