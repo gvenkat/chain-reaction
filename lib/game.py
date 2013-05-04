@@ -16,9 +16,20 @@ class Game( object ):
   def __init__( self, screen ):
     self.surface = screen
     self.reset_game_level( 0 )
+    self.stopped_balls = 0
+
 
   def reset_game_level( self, level ):
     Game.game_level = level
+
+
+  def finished_all_levels( self ):
+    return Game.game_level >= max( [ int( i ) for i in gamelevel.levels.keys() ] )
+
+
+  def failed_level( self ):
+    return self.stopped_balls < gamelevel.levels[ str( Game.game_level ) ][ 'stopped_balls' ]
+
 
   def start( self ):
 
@@ -26,6 +37,7 @@ class Game( object ):
 
     level       = gamelevel.levels[ str( Game.game_level ) ]
     xmax, ymax  = self.surface.get_size()
+    self.stopped_balls = 0
 
     # Starter ball
     starter = ball.StarterBall( 30, pygame.Color( 255, 0, 0 ) )
@@ -65,12 +77,14 @@ class Game( object ):
           print "starter:", self.starter.rect
           ball.stop()
           ball.expand()
+          self.stopped_balls += 1
 
         if ball.stopped:
           for other_ball in self.sprites:
             if ( not other_ball is ball ) and ( not other_ball.stopped ) and not ball.remove and other_ball.rect.colliderect( ball.rect ):
               other_ball.stop()
               other_ball.expand()
+              self.stopped_balls += 1
 
 
     if self.starter.remove:

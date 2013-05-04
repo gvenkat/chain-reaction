@@ -58,10 +58,23 @@ while True:
 
 
   if game.Game.started:
-    _game.update()
-
     if _game.has_ended():
-      print "The game has ended"
+
+      if _game.failed_level():
+        print "Level Failed"
+        raise SystemExit
+
+      elif _game.finished_all_levels():
+        print "Finished all available levels"
+        raise SystemExit
+
+      else:
+        # start next level
+        game.Game.game_level += 1
+        _game.start()
+
+    else:
+      _game.update()
 
 
 
