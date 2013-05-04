@@ -7,17 +7,10 @@ sys.path.insert( 0, 'lib' )
 
 from pygame.locals import *
 
+from gameconfig import *
 import grid
 import menu
 import game
-
-# constants
-WIDTH = 800
-HEIGHT = 600
-DRAW_GRIDS = True
-BACKGROUND_COLOR = Color( 233, 233, 233 )
-FOREGROUND_COLOR = None
-GRID_COLOR = None
 
 
 # initialize
@@ -49,7 +42,7 @@ pygame.display.flip()
 # deal with the game
 while True:
 
-  clock.tick( 30 )
+  clock.tick( FPS )
 
   for event in pygame.event.get( [ QUIT, KEYDOWN, MOUSEMOTION, MOUSEBUTTONDOWN ] ):
     if event.type == QUIT:

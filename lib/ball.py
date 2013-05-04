@@ -3,6 +3,7 @@ import math
 import random
 import pygame
 from pygame import sprite, Color
+import gameconfig
 
 
 class GameBall( sprite.Sprite ):
@@ -92,8 +93,7 @@ class StarterBall( sprite.Sprite ):
     else:
       self.timer += 1
 
-      if self.timer == ( 30 * 10 ):
-        print "Setting remove"
+      if self.timer == ( gameconfig.FPS * 5 ):
         self.remove = True
 
 
