@@ -30,11 +30,16 @@ class GameBall( sprite.Sprite ):
     self.x = ( self.xmax - 2 * self.ball_size ) * random.random() + self.ball_size
     self.y = ( self.ymax - 2 * self.ball_size ) * random.random() + self.ball_size
 
-    image = pygame.Surface((ball_size*2, ball_size*2), pygame.SRCALPHA, 32)
+    self.draw_image()
+    self.set_position()
+
+
+  def draw_image( self ):
+    image = pygame.Surface((self.ball_size*2, self.ball_size*2), pygame.SRCALPHA, 32)
     self.image = image.convert_alpha()
+    pygame.draw.circle(self.image, self.color, (self.ball_size, self.ball_size), self.ball_size, 0)
 
-    pygame.draw.circle(self.image, self.color, (ball_size,ball_size), ball_size, 0)
-
+  def set_position( self ):
     self.rect = self.image.get_rect()
     self.rect.midtop = ( self.x, self.y )
 
@@ -71,7 +76,9 @@ class GameBall( sprite.Sprite ):
         self.remove = True
       else:
         # Expand
-        pass
+        self.ball_size += 1
+        self.draw_image()
+
 
 
 
