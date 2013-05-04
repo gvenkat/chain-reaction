@@ -96,6 +96,10 @@ class Game( object ):
     self.group.draw( self.surface )
 
 
+  def has_ended( self ):
+    return self.starter.remove and all( [ i.remove for i in self.sprites if i.stopped ] )
+
+
   def handle_event( self, event ):
 
     if event.type == MOUSEMOTION:

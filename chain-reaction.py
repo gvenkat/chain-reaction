@@ -60,5 +60,11 @@ while True:
   if game.Game.started:
     _game.update()
 
+    if _game.has_ended():
+      print "The game has ended"
+
+
+
+
 
   pygame.display.flip()
