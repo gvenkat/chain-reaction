@@ -27,7 +27,6 @@ class Game( object ):
     level       = gamelevel.levels[ str( Game.game_level ) ]
     xmax, ymax  = self.surface.get_size()
 
-
     # Starter ball
     starter = ball.StarterBall( 30, pygame.Color( 255, 0, 0 ) )
     starter_group = Group( starter )
@@ -60,13 +59,16 @@ class Game( object ):
 
       for ball in self.sprites:
         # with the starter ball
-        if ball.rect.colliderect( self.starter.rect ) and not ball.stopped:
+        if ball.rect.colliderect( self.starter.rect ) and not ball.stopped and not self.starter.remove:
+          print "collides with the start ball"
+          print "ball:", ball.rect
+          print "starter:", self.starter.rect
           ball.stop()
           ball.expand()
 
         if ball.stopped:
           for other_ball in self.sprites:
-            if ( not other_ball is ball ) and ( not other_ball.stopped ) and other_ball.rect.colliderect( ball.rect ):
+            if ( not other_ball is ball ) and ( not other_ball.stopped ) and not ball.remove and other_ball.rect.colliderect( ball.rect ):
               other_ball.stop()
               other_ball.expand()
 

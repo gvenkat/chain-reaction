@@ -21,8 +21,9 @@ class GameBall( sprite.Sprite ):
     self.stopped = False
     self.timer = 0
     self.remove = False
+    self.max_ball_size = ball_size * 2
 
-    self.direction = 20 + ( random.random() * 340 )
+    self.direction = 30 + ( random.random() * 330 )
 
     self.downspeed = math.cos( self.direction ) * self.ball_speed
     self.rightspeed = math.sin( self.direction ) * self.ball_speed
@@ -75,9 +76,9 @@ class GameBall( sprite.Sprite ):
       if self.timer == ( gameconfig.FPS * 5 ):
         self.remove = True
       else:
-        # Expand
-        self.ball_size += 1
-        self.draw_image()
+        if self.max_ball_size > self.ball_size:
+          self.ball_size += 1
+          self.draw_image()
 
 
 
