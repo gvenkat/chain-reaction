@@ -21,7 +21,7 @@ class GameBall( sprite.Sprite ):
     self.stopped = False
     self.timer = 0
     self.remove = False
-    self.max_ball_size = ball_size * 2
+    self.max_ball_size = ball_size * 5
 
     self.direction = 30 + ( random.random() * 330 )
 
